@@ -12,7 +12,12 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
   constructor(private el: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit() {
-    // Find the closest countdown wrapper to observe for size changes
+    // Wait for all fonts to be loaded before the initial resize
+    document.fonts.ready.then(() => {
+      this.resizeText()
+    })
+
+// Find the closest countdown wrapper to observe for size changes
     const container = this.el.nativeElement.closest(
       '.countdown-wrapper',
     ) as HTMLElement
@@ -24,9 +29,6 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
     })
 
     this.resizeObserver.observe(container)
-
-    // Initial resize on view init
-    this.resizeText()
   }
 
   ngOnDestroy() {
