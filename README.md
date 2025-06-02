@@ -14,10 +14,8 @@ A simple, responsive countdown app built with Angular. It dynamically resizes in
 The app is deployed and available here:  
 [https://amandatilly-countdown-app.netlify.app/](https://amandatilly-countdown-app.netlify.app/)
 
+
 ## Setup
-
-# Setup Instructions
-
 1. **Clone the repository**
 
    ```bash
