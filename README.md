@@ -1,59 +1,39 @@
-# CountdownApp
+# Countdown App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+A simple, responsive countdown app built with Angular. It dynamically resizes input text to fit the container and remembers your countdown title and date using localStorage.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- Angular
+- TypeScript
+- SCSS
+- date-fns
 
-```bash
-ng serve
-```
+## Live Demo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app is deployed and available here:  
+[https://amandatilly-countdown-app.netlify.app/](https://amandatilly-countdown-app.netlify.app/)
 
-## Code scaffolding
+## Setup
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+# Setup Instructions
 
-```bash
-ng generate component component-name
-```
+1. **Clone the repository**
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   ```bash
+   git clone <repository-url>
+   cd <project-folder>
 
-```bash
-ng generate --help
-```
+2. **Install dependencies**
 
-## Building
+    ```bash
+    npm install
 
-To build the project run:
+3. **Run the development server**
 
-```bash
-ng build
-```
+    ```bash
+    ng serve
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+4. **Open in your browser**
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    Visit http://localhost:4200 to see the app running.
