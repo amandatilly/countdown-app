@@ -17,7 +17,7 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
       this.resizeText()
     })
 
-// Find the closest countdown wrapper to observe for size changes
+    // Find the closest countdown wrapper to observe for size changes
     const container = this.el.nativeElement.closest(
       '.countdown-wrapper',
     ) as HTMLElement
