@@ -7,14 +7,12 @@ import {
 } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { AutoFontSizeDirective } from '../directives/auto-font-size.directive'
-import { intervalToDuration, formatDuration, Duration } from 'date-fns'
-
-type CountdownTime = {
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-}
+import {
+  intervalToDuration,
+  Duration,
+  differenceInCalendarDays,
+  addYears,
+} from 'date-fns'
 
 @Component({
   selector: 'app-countdown',
@@ -38,7 +36,6 @@ export class CountdownComponent implements OnInit, OnDestroy {
   })
 
   interval: any // Interval timer reference
-  countdown: CountdownTime = { days: 0, hours: 0, minutes: 0, seconds: 0 }
 
   ngOnInit() {
     this.restoreFromLocalStorage()
@@ -100,7 +97,17 @@ export class CountdownComponent implements OnInit, OnDestroy {
   // Formats duration object into readable string parts
   private formatDurationParts(duration: Duration): string {
     const parts: string[] = []
-    if (duration.days) parts.push(`${duration.days} days`)
+
+    let totalDays = duration.days ?? 0
+
+    if (duration.years) {
+      const now = new Date()
+      const future = addYears(now, duration.years)
+      const daysBetween = differenceInCalendarDays(future, now)
+      totalDays += daysBetween
+    }
+
+    if (totalDays) parts.push(`${totalDays} day${totalDays !== 1 ? 's' : ''}`)
     if (duration.hours) parts.push(`${duration.hours} h`)
     if (duration.minutes) parts.push(`${duration.minutes}m`)
     if (duration.seconds || parts.length === 0)
@@ -115,13 +122,6 @@ export class CountdownComponent implements OnInit, OnDestroy {
     const now = new Date()
     const duration = intervalToDuration({ start: now, end: target })
 
-    this.countdown = {
-      days: duration.days ?? 0,
-      hours: duration.hours ?? 0,
-      minutes: duration.minutes ?? 0,
-      seconds: duration.seconds ?? 0,
-    }
-
     this.formattedDuration = this.formatDurationParts(duration)
   }
 
@@ -131,7 +131,6 @@ export class CountdownComponent implements OnInit, OnDestroy {
       clearInterval(this.interval)
       this.interval = null
     }
-    this.countdown = { days: 0, hours: 0, minutes: 0, seconds: 0 }
   }
 
   ngOnDestroy() {
