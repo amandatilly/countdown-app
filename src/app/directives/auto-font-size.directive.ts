@@ -4,7 +4,8 @@ import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core'
   selector: '[autoFontSize]',
 })
 export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
-  private resizeObserver!: ResizeObserver
+  private resizeObserver?: ResizeObserver
+  private container?: HTMLElement
 
   private readonly minFontSize = 10
   private readonly maxFontSize = 200
@@ -18,17 +19,17 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
     })
 
     // Find the closest countdown wrapper to observe for size changes
-    const container = this.el.nativeElement.closest(
+    this.container = this.el.nativeElement.closest(
       '.countdown-wrapper',
     ) as HTMLElement
-    if (!container) return
+    if (!this.container) return
 
     // Observe container size and trigger font resizing on changes
     this.resizeObserver = new ResizeObserver(() => {
       requestAnimationFrame(() => this.resizeText())
     })
 
-    this.resizeObserver.observe(container)
+    this.resizeObserver.observe(this.container)
   }
 
   ngOnDestroy() {
@@ -41,15 +42,14 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
   // Dynamically adjust the font size to fit within the parent container
   resizeText() {
     const element = this.el.nativeElement as HTMLElement
-    const parent = element.parentElement
 
-    if (!parent) return
+    if (!this.container) return
 
     // Start with the minimum font size
     element.style.fontSize = `${this.minFontSize}px`
     element.style.whiteSpace = 'nowrap'
 
-    const maxWidth = parent.offsetWidth
+    const maxWidth = this.container.offsetWidth
     if (maxWidth === 0) return
 
     let fontSize = this.minFontSize
