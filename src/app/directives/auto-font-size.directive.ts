@@ -1,9 +1,17 @@
-import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core'
+import {
+  Directive,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  SimpleChanges,
+  Input,
+} from '@angular/core'
 
 @Directive({
   selector: '[autoFontSize]',
 })
 export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
+  @Input() text = ''
   private resizeObserver?: ResizeObserver
   private container?: HTMLElement
 
@@ -30,6 +38,12 @@ export class AutoFontSizeDirective implements AfterViewInit, OnDestroy {
     })
 
     this.resizeObserver.observe(this.container)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['text']) {
+      requestAnimationFrame(() => this.resizeText())
+    }
   }
 
   ngOnDestroy() {

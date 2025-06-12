@@ -1,12 +1,14 @@
 <div class="countdown-wrapper">
   <!-- Dynamic title and duration display -->
   <div class="countdown-display">
-    <h1 autoFontSize>
-      Time to {{ countdownForm.value.title || 'your event' }}
-    </h1>
-    <p autoFontSize *ngIf="formattedDuration">
-      {{ formattedDuration }}
-    </p>
+
+      <h1 autoFontSize [text]="countdownForm.value.title || 'your event'">
+        Time to {{ countdownForm.value.title || 'your event' }}
+      </h1>
+      <p autoFontSize *ngIf="formattedDuration" [text]="formattedDuration">
+        {{ formattedDuration }}
+      </p>
+
   </div>
 
   <!-- Countdown form for user input -->
