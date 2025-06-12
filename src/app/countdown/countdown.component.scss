@@ -6,7 +6,6 @@
   gap: 3rem;
   background: #f5f3f3;
   min-height: 100vh;
-  padding: 0 1.5rem;
 
   .countdown-display {
     width: 100%;
@@ -16,22 +15,22 @@
     text-align: center;
 
     h1[autoFontSize] {
-      width: 100%;
       display: block;
       color: #72035d;
       font-weight: 800;
       overflow: hidden;
       text-align: center;
+      padding: 0 1.5rem;
     }
 
     p[autoFontSize] {
-      width: 100%;
       display: block;
       color: #000;
       font-weight: 400;
       overflow: hidden;
       text-align: center;
       margin: 0.625px;
+      padding: 0 1.5rem;
     }
   }
 
